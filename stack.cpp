@@ -1,13 +1,22 @@
-#include <stdlib.h>
 #include "Stack.h"
 
 const int MULTIPLIER = 2;
+const int N_CANARY = 2;
 
-IronStack StackConstuct(long long size, long long capacity){
+/**
+* \brief Конструктор
+* \detail Выставляет начальные значения для стека
+* \param [in] size Размер стека
+* \param [in] capacity Вместимость стека без учёта наличия канареек
+* \throw Если невозможно выделить память
+* \return Стек
+*/
+
+    IronStack StackConstuct(int64_t size, int64_t capacity){
     IronStack Stack;
     Stack.capacity = capacity;
-    Stack.array = (int*) calloc(capacity + 2, sizeof(StackElement));
-    if (Stack.array = NULL)
+    Stack.array = (int*) calloc(capacity + N_CANARY, sizeof(StackElement));
+    if (Stack.array == NULL)
     {
         perror("Cannot allocate memory for stack.");
     }
@@ -39,15 +48,16 @@ StackElement Top(IronStack Stack) {
     return Stack.array[Size(Stack)];
 }
 
-long long Size(IronStack Stack) {
+int64_t Size(IronStack Stack) {
     Check(Stack);
     return Stack.size;
 }
 
-IronStack Reallocate(IronStack Stack, long long new_capacity) {
+IronStack Reallocate(IronStack Stack, int64_t new_capacity) {
     if (new_capacity < Size(Stack) + 2) {
         perror("Need more space for the array.");
     }
+
     StackElement* new_array = (StackElement*) realloc(Stack.array, new_capacity);
     if (new_array != NULL) {
         Stack.array = new_array;
@@ -55,6 +65,7 @@ IronStack Reallocate(IronStack Stack, long long new_capacity) {
         Check(Stack);
         return Stack;
     }
+
     IronStack NewStack = StackConstuct(Stack.size, new_capacity);
     for(size_t i = 0; i < Size(Stack); ++i) {
         NewStack.array[i] = Stack.array[i];
@@ -65,7 +76,7 @@ IronStack Reallocate(IronStack Stack, long long new_capacity) {
 }
 
 void Check(IronStack Stack) {
-    if (Stack.array[0] != Stack.CANARY || Stack.array[Stack.capacity] != Stack.CANARY) {
+    if (Stack.array[0] != Stack.CANARY || Stack.array[Stack.capacity - 1] != Stack.CANARY) {
         perror("The data in the stack is invalid.");
     }
 }
