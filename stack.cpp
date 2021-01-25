@@ -1,4 +1,4 @@
-#include "Stack.h"
+#include "stack.h"
 
 const int MULTIPLIER = 2;
 const int N_CANARY = 2;
@@ -11,72 +11,86 @@ const int N_CANARY = 2;
 * \throw Если невозможно выделить память
 * \return Стек
 */
+uint64_t hashing (StackElement& Stack) {
+    uint64_t hash = 10;
+    for (int i = 0; i < Size(Stack) - 1; ++i) {
+        hash += (i + 1) * Stack.begin[i] + 10;
+    }
+    return hash;
+}
 
-    IronStack StackConstuct(int64_t size, int64_t capacity){
+IronStack StackConstruct(int64_t size, int64_t capacity) {
     IronStack Stack;
     Stack.capacity = capacity;
-    Stack.array = (int*) calloc(capacity + N_CANARY, sizeof(StackElement));
+    Stack.array = (StackElement*) calloc(capacity + N_CANARY, sizeof(StackElement));
     if (Stack.array == NULL)
     {
         perror("Cannot allocate memory for stack.");
     }
+    Stack.begin = Stack.array + 1;
     Stack.size = size;
-    Stack.array[0] = Stack.CANARY;
-    Stack.array[Stack.capacity] = Stack.CANARY; 
+    Stack.hash = hashing(Stack);
+    *Stack.array = Stack.CANARY;
+    Stack.begin[Stack.capacity] = Stack.CANARY;
+    return Stack;
 }
 
-void Push(IronStack Stack, StackElement new_el) {
-    if(Stack.size + 1 < Stack.capacity) {
+void Push(IronStack& Stack, StackElement new_el) {
+    if (Stack.size + 1 > Stack.capacity) {
         IronStack NewStack = Reallocate(Stack, MULTIPLIER * Stack.capacity);
     }
-    else {
-        Stack.array[Size(Stack)] = new_el;
-        ++Stack.size;
-    }
+
+    Stack.begin[Size(Stack)] = new_el;
+    ++Stack.size;
+    //if (hashing(Stack) != )
     Check(Stack);
 }
 
-StackElement Pop(IronStack Stack) {
-    StackElement old_el = Stack.array[Size(Stack)];
+StackElement Pop(IronStack& Stack) {
+    StackElement old_el = Stack.begin[Size(Stack) - 1];
     --Stack.size;
     Check(Stack);
     return old_el;
 }
 
-StackElement Top(IronStack Stack) {
+StackElement Top(IronStack& Stack) {
     Check(Stack);
-    return Stack.array[Size(Stack)];
+    return Stack.begin[Size(Stack) - 1];
 }
 
-int64_t Size(IronStack Stack) {
+int64_t Size(IronStack& Stack) {
     Check(Stack);
     return Stack.size;
 }
 
-IronStack Reallocate(IronStack Stack, int64_t new_capacity) {
-    if (new_capacity < Size(Stack) + 2) {
+IronStack Reallocate(IronStack& Stack, int64_t new_capacity) {
+    if (new_capacity < Size(Stack)) {
         perror("Need more space for the array.");
     }
 
-    StackElement* new_array = (StackElement*) realloc(Stack.array, new_capacity);
-    if (new_array != NULL) {
-        Stack.array = new_array;
-        Stack.capacity = new_capacity;
-        Check(Stack);
-        return Stack;
+    StackElement* new_array = (StackElement*) realloc(Stack.array, new_capacity + N_CANARY);
+    if (Stack.array == NULL) {
+        perror("Stack is empty");
+    }
+    if (new_array == NULL) {
+        IronStack NewStack = StackConstruct(Stack.size, new_capacity);
+        for (size_t i = 0; i < Size(Stack); ++i) {
+            NewStack.array[i] = Stack.array[i];
+        }
+        Check(NewStack);
+        return NewStack;
     }
 
-    IronStack NewStack = StackConstuct(Stack.size, new_capacity);
-    for(size_t i = 0; i < Size(Stack); ++i) {
-        NewStack.array[i] = Stack.array[i];
-    }
-    Stack.array[Stack.capacity - 1] = Stack.CANARY;
+    Stack.array = new_array;
+    Stack.begin = Stack.array + 1;
+    Stack.capacity = new_capacity;
+    Stack.begin[Stack.capacity] = Stack.CANARY;
     Check(Stack);
     return Stack;
 }
 
-void Check(IronStack Stack) {
-    if (Stack.array[0] != Stack.CANARY || Stack.array[Stack.capacity - 1] != Stack.CANARY) {
+void Check(IronStack& Stack) {
+    if (*Stack.array != Stack.CANARY || Stack.begin[Stack.capacity] != Stack.CANARY) {
         perror("The data in the stack is invalid.");
     }
 }

@@ -1,0 +1,3 @@
+C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/iron_stack.dir
+C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/rebuild_cache.dir

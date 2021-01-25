@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/natas/Desktop/iron stack/stack.cpp
+Stack.h
+C:/Users/natas/Desktop/iron stack/stack.h
+
+C:/Users/natas/Desktop/iron stack/stack.h
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+stdbool.h
+-
+
