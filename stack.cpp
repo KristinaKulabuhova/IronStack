@@ -11,13 +11,14 @@ const int N_CANARY = 2;
 * \throw Если невозможно выделить память
 * \return Стек
 */
-uint64_t hashing (StackElement& Stack) {
-    uint64_t hash = 10;
-    for (int i = 0; i < Size(Stack) - 1; ++i) {
-        hash += (i + 1) * Stack.begin[i] + 10;
-    }
-    return hash;
-}
+
+//uint64_t hashing (IronStack& Stack) {
+//    uint64_t hash = 10;
+//    for (int64_t i = 0; i < Size(Stack) - 1; ++i) {
+//        hash += (i + 1) * Stack.begin[i] + 10;
+//    }
+//    return hash;
+//}
 
 IronStack StackConstruct(int64_t size, int64_t capacity) {
     IronStack Stack;
@@ -29,20 +30,22 @@ IronStack StackConstruct(int64_t size, int64_t capacity) {
     }
     Stack.begin = Stack.array + 1;
     Stack.size = size;
-    Stack.hash = hashing(Stack);
+//    Stack.hash = hashing(Stack);
     *Stack.array = Stack.CANARY;
     Stack.begin[Stack.capacity] = Stack.CANARY;
     return Stack;
 }
 
 void Push(IronStack& Stack, StackElement new_el) {
+//    uint64_t old_hash = Stack.hash;
     if (Stack.size + 1 > Stack.capacity) {
         IronStack NewStack = Reallocate(Stack, MULTIPLIER * Stack.capacity);
     }
 
     Stack.begin[Size(Stack)] = new_el;
     ++Stack.size;
-    //if (hashing(Stack) != )
+//    if (hashing(Stack) != old_hash + Stack.size * new_el + 10)
+//        perror("The data in the stack is invalid");
     Check(Stack);
 }
 
@@ -65,7 +68,7 @@ int64_t Size(IronStack& Stack) {
 
 IronStack Reallocate(IronStack& Stack, int64_t new_capacity) {
     if (new_capacity < Size(Stack)) {
-        perror("Need more space for the array.");
+        perror("Need more space for the array");
     }
 
     StackElement* new_array = (StackElement*) realloc(Stack.array, new_capacity + N_CANARY);
@@ -91,6 +94,6 @@ IronStack Reallocate(IronStack& Stack, int64_t new_capacity) {
 
 void Check(IronStack& Stack) {
     if (*Stack.array != Stack.CANARY || Stack.begin[Stack.capacity] != Stack.CANARY) {
-        perror("The data in the stack is invalid.");
+        perror("The data in the stack is invalid");
     }
 }
