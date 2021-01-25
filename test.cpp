@@ -12,7 +12,7 @@ bool Test_Push(IronStack& Stack, StackElement new_el) {
 
 bool Test_Pop(IronStack& Stack) {
     StackElement old_el = Pop(Stack);
-    return (old_el == Stack.begin[Stack.size] && Test_Check(Stack));
+    return (old_el == Stack.array[Stack.size + 1] && Test_Check(Stack));
 }
 
 bool Test_Top(IronStack& Stack) {
@@ -31,5 +31,5 @@ bool Test_Reallocate(IronStack& Stack, int64_t new_capacity) {
 }
 
 bool Test_Check(IronStack& Stack) {
-    return (Stack.array[0] == Stack.CANARY && Stack.begin[Stack.capacity] == Stack.CANARY);
+    return (Stack.array[0] == Stack.CANARY && Stack.array[Stack.capacity + 1] == Stack.CANARY);
 }

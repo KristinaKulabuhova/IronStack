@@ -13,7 +13,6 @@
 
 typedef struct {
     StackElement* array;
-    StackElement* begin;
     int64_t size;
     StackElement CANARY = rand();
     int64_t capacity;

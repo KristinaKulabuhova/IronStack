@@ -28,10 +28,9 @@ IronStack StackConstruct(int64_t size, int64_t capacity) {
     {
         perror("Cannot allocate memory for stack.");
     }
-    Stack.begin = Stack.array + 1;
     Stack.size = size;
     *Stack.array = Stack.CANARY;
-    Stack.begin[Stack.capacity] = Stack.CANARY;
+    Stack.array[Stack.capacity + 1] = Stack.CANARY;
     Stack.hash = hashing(Stack);
     return Stack;
 }
@@ -95,9 +94,8 @@ IronStack Reallocate(IronStack& Stack, int64_t new_capacity) {
     }
 
     Stack.array = new_array;
-    Stack.begin = Stack.array + 1;
     Stack.capacity = new_capacity;
-    Stack.begin[Stack.capacity] = Stack.CANARY;
+    Stack.array[Stack.capacity + 1] = Stack.CANARY;
     Stack.hash = hashing(Stack);
     Check(Stack);
     if (hashing(Stack) != old_hash) {
