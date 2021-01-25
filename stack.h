@@ -17,10 +17,10 @@ typedef struct {
     int64_t size;
     StackElement CANARY = rand();
     int64_t capacity;
-//    uint64_t hash;
+    uint64_t hash;
 } IronStack;
 
-//uint64_t hashing (IronStack& Stack);
+uint64_t hashing (IronStack& Stack);
 
 IronStack StackConstruct(int64_t size, int64_t capacity);
 void Push(IronStack& Stack, StackElement new_el);

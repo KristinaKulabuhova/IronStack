@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/natas/Desktop/iron stack/main.cpp
-stack.h
-C:/Users/natas/Desktop/iron stack/stack.h
-test.h
-C:/Users/natas/Desktop/iron stack/test.h
-
 C:/Users/natas/Desktop/iron stack/stack.cpp
 stack.h
 C:/Users/natas/Desktop/iron stack/stack.h
@@ -25,14 +19,4 @@ stdint.h
 -
 stdbool.h
 -
-
-C:/Users/natas/Desktop/iron stack/test.cpp
-test.h
-C:/Users/natas/Desktop/iron stack/test.h
-
-C:/Users/natas/Desktop/iron stack/test.h
-stdint.h
--
-stack.h
-C:/Users/natas/Desktop/iron stack/stack.h
 
