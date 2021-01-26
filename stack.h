@@ -19,14 +19,15 @@ typedef struct {
     uint64_t hash;
 } IronStack;
 
-uint64_t hashing (IronStack& Stack);
+uint64_t hashing (IronStack* Stack);
 
-IronStack StackConstruct(int64_t size, int64_t capacity);
-void Push(IronStack& Stack, StackElement new_el);
-StackElement Pop(IronStack& Stack);
-StackElement Top(IronStack& Stack);
-int64_t Size(IronStack& Stack);
-IronStack Reallocate(IronStack& Stack, int64_t new_capacity);
-void Check(IronStack& Stack);
+IronStack* StackConstruct(int64_t size, int64_t capacity);
+void StackDestructor(IronStack* Stack);
+void Push(IronStack* Stack, StackElement new_el);
+StackElement Pop(IronStack* Stack);
+StackElement Top(IronStack* Stack);
+int64_t Size(IronStack* Stack);
+IronStack* Reallocate(IronStack* Stack, int64_t new_capacity);
+void Check(IronStack* Stack);
 
 #endif //STACK_H

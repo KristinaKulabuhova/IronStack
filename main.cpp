@@ -11,7 +11,7 @@ void Tests() {
         printf ("%s","Test 1 is FALSE\n");
     }
 
-    IronStack Stack = StackConstruct(6, 7);
+    IronStack* Stack = StackConstruct(6, 7);
 
     if (Test_Push(Stack, 2)) {
         printf ("%s","Test 2 is TRUE\n");
@@ -69,6 +69,7 @@ void Tests() {
     else {
         printf ("%s","Test 9 is FALSE\n");
     }
+    StackDestructor(Stack);
 }
 
 #endif
