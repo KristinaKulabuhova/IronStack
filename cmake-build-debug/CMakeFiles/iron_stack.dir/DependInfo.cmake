@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/natas/Desktop/iron stack/hash.cpp" "C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/iron_stack.dir/hash.cpp.obj"
   "C:/Users/natas/Desktop/iron stack/main.cpp" "C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/iron_stack.dir/main.cpp.obj"
   "C:/Users/natas/Desktop/iron stack/stack.cpp" "C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/iron_stack.dir/stack.cpp.obj"
   "C:/Users/natas/Desktop/iron stack/test.cpp" "C:/Users/natas/Desktop/iron stack/cmake-build-debug/CMakeFiles/iron_stack.dir/test.cpp.obj"

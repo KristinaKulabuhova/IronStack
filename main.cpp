@@ -1,5 +1,7 @@
 #include "stack.h"
 #include "test.h"
+#include "hash.h"
+
 #define StackElement int;
 
 #ifdef TEST_BUILD
@@ -78,4 +80,6 @@ int main() {
     #ifdef TEST_BUILD
     Tests();
     #endif
+
+    Test_Hash(100, 10000);
 }

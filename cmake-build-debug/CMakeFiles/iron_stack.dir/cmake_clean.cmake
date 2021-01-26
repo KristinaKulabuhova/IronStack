@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/iron_stack.dir/hash.cpp.obj"
   "CMakeFiles/iron_stack.dir/main.cpp.obj"
   "CMakeFiles/iron_stack.dir/stack.cpp.obj"
   "CMakeFiles/iron_stack.dir/test.cpp.obj"

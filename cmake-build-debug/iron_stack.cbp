@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/natas/Desktop/iron stack/hash.cpp">
+			<Option target="iron_stack"/>
+		</Unit>
+		<Unit filename="C:/Users/natas/Desktop/iron stack/hash.h">
+			<Option target="iron_stack"/>
+		</Unit>
 		<Unit filename="C:/Users/natas/Desktop/iron stack/main.cpp">
 			<Option target="iron_stack"/>
 		</Unit>

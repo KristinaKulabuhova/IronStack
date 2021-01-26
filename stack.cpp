@@ -15,9 +15,9 @@ const int N_CANARY = 2;
 uint64_t hashing (IronStack* Stack) {
     uint64_t hash = 0;
     for (int64_t i = 1; i <= Stack->size; ++i) {
-        hash += i * Stack->array[i] + 10;
+        hash += i * Stack->array[i] + 7;
     }
-    return hash;
+    return hash % 103;
 }
 
 IronStack* StackConstruct(int64_t size, int64_t capacity) {
@@ -48,7 +48,7 @@ void Push(IronStack* Stack, StackElement new_el) {
     ++Stack->size;
     Stack->array[Size(Stack)] = new_el;
     Stack->hash = hashing(Stack);
-    if (hashing(Stack) != old_hash + Stack->size * new_el + 10)
+    if (hashing(Stack) != (old_hash + Stack->size * new_el + 7) % 103)
         perror("Problems with hash");
     Check(Stack);
 }
@@ -58,7 +58,7 @@ StackElement Pop(IronStack* Stack) {
     StackElement old_el = Stack->array[Size(Stack)];
     --Stack->size;
     Stack->hash = hashing(Stack);
-    if (Stack->hash != old_hash - (Stack->size + 1) * old_el - 10) {
+    if (Stack->hash != (old_hash - (Stack->size + 1) * old_el - 7) % 103) {
         perror("Problems with hash");
     }
     Check(Stack);

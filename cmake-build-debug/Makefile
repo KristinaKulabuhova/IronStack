@@ -142,6 +142,33 @@ iron_stack/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\iron_stack.dir\build.make CMakeFiles/iron_stack.dir/build
 .PHONY : iron_stack/fast
 
+hash.obj: hash.cpp.obj
+
+.PHONY : hash.obj
+
+# target to build an object file
+hash.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iron_stack.dir\build.make CMakeFiles/iron_stack.dir/hash.cpp.obj
+.PHONY : hash.cpp.obj
+
+hash.i: hash.cpp.i
+
+.PHONY : hash.i
+
+# target to preprocess a source file
+hash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iron_stack.dir\build.make CMakeFiles/iron_stack.dir/hash.cpp.i
+.PHONY : hash.cpp.i
+
+hash.s: hash.cpp.s
+
+.PHONY : hash.s
+
+# target to generate assembly for a file
+hash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iron_stack.dir\build.make CMakeFiles/iron_stack.dir/hash.cpp.s
+.PHONY : hash.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -232,6 +259,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... iron_stack
+	@echo ... hash.obj
+	@echo ... hash.i
+	@echo ... hash.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

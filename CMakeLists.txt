@@ -10,5 +10,7 @@ add_executable(iron_stack
         main.cpp
         stack.cpp
         stack.h
+        hash.cpp
+        hash.h
         test.cpp
-        test.h)
+        test.h hash.h)
