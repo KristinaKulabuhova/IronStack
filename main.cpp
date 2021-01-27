@@ -4,76 +4,24 @@
 
 #define StackElement int;
 
+#define TEST(FUNCTION, TEST_NAME) if((FUNCTION)) { printf ("Test " TEST_NAME " passed\n"); } else { printf ("Test " TEST_NAME " failed\n"); }
+
 #ifdef TEST_BUILD
 void Tests() {
-    if (Test_StackConstruct(5, 7)) {
-        printf ("%s","Test 1 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 1 is FALSE\n");
-    }
-
+    TEST(Test_StackConstruct(5, 7), "CONSTRUCT");
     IronStack* Stack = StackConstruct(6, 7);
-
-    if (Test_Push(Stack, 2)) {
-        printf ("%s","Test 2 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 2 is FALSE\n");
-    }
-
-    if (Test_Push(Stack, 4)) {
-        printf ("%s","Test 3 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 3 is FALSE\n");
-    }
-
-    if (Test_Pop(Stack)) {
-        printf ("%s","Test 4 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 4 is FALSE\n");
-    }
-
-    if (Test_Top(Stack)) {
-        printf ("%s","Test 5 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 5 is FALSE\n");
-    }
-
-    if (Test_Size(Stack)) {
-        printf ("%s","Test 6 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 6 is FALSE\n");
-    }
-
-    if (Test_Reallocate(Stack, 10)) {
-        printf ("%s","Test 7 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 7 is FALSE\n");
-    }
-
+    TEST(Test_Push(Stack, 2),"PUSH");
+    TEST(Test_Push(Stack, 4), "PUSH")
+    TEST(Test_Pop(Stack), "POP");
+    TEST(Test_Top(Stack), "TOP");
+    TEST(Test_Size(Stack), "SIZE");
+    TEST(Test_Reallocate(Stack, 10), "REALLOCATE");
     Pop(Stack);
-    if (Test_Reallocate(Stack, 6)) {
-        printf ("%s","Test 8 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 8 is FALSE\n");
-    }
+    TEST(Test_Reallocate(Stack, 6), "REALLOCATE");
+    TEST(Test_Check(Stack), "CHECK");
 
-    if (Test_Check(Stack)) {
-         printf ("%s","Test 9 is TRUE\n");
-    }
-    else {
-        printf ("%s","Test 9 is FALSE\n");
-    }
     StackDestructor(Stack);
 }
-
 #endif
 
 int main() {
